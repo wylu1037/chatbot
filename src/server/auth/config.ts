@@ -5,7 +5,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { db } from "@/server/db";
 import { PrismaClient } from "@prisma/client";
 import { compare } from "bcryptjs";
-
+import GithubProvider from "next-auth/providers/github";
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
  * object and keep type safety.
@@ -35,6 +35,7 @@ declare module "next-auth" {
 export const authConfig = {
   providers: [
     DiscordProvider,
+    GithubProvider,
     CredentialsProvider({
       credentials: {
         email: { type: "email" },
@@ -53,8 +54,9 @@ export const authConfig = {
      */
   ],
   adapter: PrismaAdapter(db),
-  session: {
-    strategy: "jwt",
+  pages: {
+    signIn: "/signin",
+    signOut: "/signout",
   },
   callbacks: {
     session: ({ session, user }) => ({
@@ -87,7 +89,9 @@ function authorize(prisma: PrismaClient) {
       credentials.password as string,
       maybeUser.password,
     );
-    if (!isValid) return null;
+    if (!isValid) {
+      throw new Error("Invalid credentials");
+    }
     return { id: maybeUser.id, email: maybeUser.email };
   };
 }
