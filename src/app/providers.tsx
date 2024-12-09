@@ -21,8 +21,14 @@ export default function Providers({ children }: { children: ReactNode }) {
         >
           <SidebarProvider>
             <AppSidebar />
-            <main>
-              <SidebarTrigger />
+            <main className="min-h-screen flex-1">
+              <div className="flex w-full flex-row items-center justify-start space-x-2">
+                <div className="w-1"></div>
+                <div className="flex items-center justify-center rounded-md border border-border">
+                  <SidebarTrigger />
+                </div>
+                <h1>Hello</h1>
+              </div>
               {children}
             </main>
           </SidebarProvider>
