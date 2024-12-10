@@ -5,7 +5,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import {
   ModelSelector,
   VisibilitySelector,
-} from "@/components/chat/chat-settings";
+} from "@/components/chat/chat-header";
 import { redirect } from "next/navigation";
 export default async function ChatLayout({
   children,
