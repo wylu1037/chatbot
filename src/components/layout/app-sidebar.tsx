@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Sidebar,
@@ -25,12 +27,14 @@ import {
   Trash2,
 } from "lucide-react";
 import { SidebarUserNav } from "./sidebar-user-nav";
+import { UserNavProps } from "@/lib/schemas/user-nav";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
 // Menu items.
 const items = [
   {
@@ -120,7 +124,7 @@ const messages = [
   },
 ];
 
-export function AppSidebar() {
+export function AppSidebar({ userNav }: { userNav: UserNavProps }) {
   return (
     <Sidebar>
       <SidebarHeader className="flex flex-row items-center justify-between p-4">
@@ -197,13 +201,7 @@ export function AppSidebar() {
         ))}
       </SidebarContent>
       <SidebarFooter>
-        <SidebarUserNav
-          user={{
-            name: "John Doe",
-            email: "john.doe@example.com",
-            image: "/images/avatar.png",
-          }}
-        />
+        <SidebarUserNav userNav={userNav} />
       </SidebarFooter>
     </Sidebar>
   );

@@ -1,3 +1,5 @@
+"use client";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,26 +17,29 @@ import {
   Share,
 } from "lucide-react";
 import Image from "next/image";
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { UserNavProps } from "@/lib/schemas/user-nav";
 
-interface UserNavProps {
-  user?: {
-    name: string;
-    email: string;
-    image?: string;
-  };
-}
-
-export function SidebarUserNav({ user }: UserNavProps) {
+export function SidebarUserNav({ userNav }: { userNav: UserNavProps }) {
+  const router = useRouter();
   const initials =
-    user?.name
+    userNav?.name
       ?.split(" ")
       .map((n) => n[0])
       .join("")
       .toUpperCase() ?? "User";
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     // Handle logout logic
-    console.log("Logout");
+    try {
+      const res = await signOut();
+      console.log(res);
+      router.push("/signin");
+      router.refresh();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -42,10 +47,10 @@ export function SidebarUserNav({ user }: UserNavProps) {
       <DropdownMenuTrigger asChild>
         <button className="flex w-full items-center rounded-lg p-4 transition-colors hover:bg-accent">
           <div className="relative mr-2 h-8 w-8 overflow-hidden rounded-full">
-            {user?.image ? (
+            {userNav?.image ? (
               <Image
-                src={user.image}
-                alt={user.name || "User avatar"}
+                src={userNav.image}
+                alt={userNav.name || "User avatar"}
                 fill
                 sizes="32px"
                 className="object-cover"
@@ -58,9 +63,9 @@ export function SidebarUserNav({ user }: UserNavProps) {
             )}
           </div>
           <div className="flex flex-1 flex-col text-left">
-            <p className="text-sm font-medium">{user?.name ?? "Guest"}</p>
+            <p className="text-sm font-medium">{userNav?.name ?? "Guest"}</p>
             <p className="text-xs text-muted-foreground">
-              {user?.email ?? "Not logged in"}
+              {userNav?.email ?? "Not logged in"}
             </p>
           </div>
         </button>

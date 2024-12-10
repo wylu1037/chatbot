@@ -1,11 +1,12 @@
 import { auth } from "@/server/auth";
+import { redirect } from "next/navigation";
 
 export default async function HomePage() {
   const session = await auth();
   if (!session) {
     return <NotSignedInPage />;
   }
-  return <main className=""></main>;
+  redirect("/chat");
 }
 
 const NotSignedInPage = () => {
