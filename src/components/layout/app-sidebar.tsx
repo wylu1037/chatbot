@@ -16,8 +16,21 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { PlusIcon } from "lucide-react";
+import {
+  PlusIcon,
+  MoreHorizontal,
+  Share2,
+  Pencil,
+  Archive,
+  Trash2,
+} from "lucide-react";
 import { SidebarUserNav } from "./sidebar-user-nav";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 // Menu items.
 const items = [
   {
@@ -48,11 +61,11 @@ const messages = [
     group: "Today",
     items: [
       {
-        title: "Ideas for Designing a Web App",
+        title: "Cursor AI",
         url: "#",
       },
       {
-        title: "How to Use ChatGPT for Productivity",
+        title: "Sora Model",
         url: "#",
       },
     ],
@@ -62,11 +75,11 @@ const messages = [
     group: "Yesterday",
     items: [
       {
-        title: "Ideas for Designing a Web App",
+        title: "Postman",
         url: "#",
       },
       {
-        title: "How to Use ChatGPT for Productivity",
+        title: "What is Kubernetes?",
         url: "#",
       },
     ],
@@ -76,11 +89,11 @@ const messages = [
     group: "Last Week",
     items: [
       {
-        title: "Ideas for Designing a Web App",
+        title: "Hooks in React",
         url: "#",
       },
       {
-        title: "How to Use ChatGPT for Productivity",
+        title: "How to use app routing in Nextjs framework",
         url: "#",
       },
     ],
@@ -90,7 +103,7 @@ const messages = [
     group: "Last Month",
     items: [
       {
-        title: "Ideas for Designing a Web App",
+        title: "Designing a Web App",
         url: "#",
       },
     ],
@@ -100,7 +113,7 @@ const messages = [
     group: "Last Year",
     items: [
       {
-        title: "Ideas for Designing a Web App",
+        title: "Rust macros",
         url: "#",
       },
     ],
@@ -137,12 +150,45 @@ export function AppSidebar() {
             <SidebarGroupContent>
               <SidebarMenu>
                 {message.items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
+                  <SidebarMenuItem key={item.title} className="group relative">
                     <SidebarMenuButton asChild>
                       <a href={item.url}>
-                        <span>{item.title}</span>
+                        <span className="max-w-[200px] overflow-clip">
+                          {item.title}
+                        </span>
                       </a>
                     </SidebarMenuButton>
+                    {/* Actions */}
+                    <div className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 transition-opacity group-hover:opacity-100">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <button className="rounded-md p-1 hover:bg-accent">
+                            <MoreHorizontal className="h-4 w-4" />
+                          </button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent
+                          align="start"
+                          className="w-[120px]"
+                        >
+                          <DropdownMenuItem>
+                            <Share2 className="mr-2 h-4 w-4" />
+                            <span>Share</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem>
+                            <Pencil className="mr-2 h-4 w-4" />
+                            <span>Rename</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem>
+                            <Archive className="mr-2 h-4 w-4" />
+                            <span>Archive</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem className="text-destructive">
+                            <Trash2 className="mr-2 h-4 w-4" />
+                            <span>Delete</span>
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </div>
                   </SidebarMenuItem>
                 ))}
               </SidebarMenu>
