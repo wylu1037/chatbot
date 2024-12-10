@@ -12,7 +12,7 @@ export default function Chat() {
   return (
     <div className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-4">
       {/* Title Section */}
-      <div className="mb-8 flex flex-col items-center space-y-2 text-center">
+      <div className="mb-8 flex flex-col items-center space-y-2 bg-background text-center">
         <h1 className="text-5xl font-bold tracking-tighter text-foreground/85">
           Make your first{" "}
           <span className="mx-1 inline-flex items-center">
