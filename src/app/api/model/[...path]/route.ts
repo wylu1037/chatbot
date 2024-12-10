@@ -7,6 +7,7 @@ import { User } from "@prisma/client";
 // create an enhanced Prisma client with user context
 async function getPrisma() {
   const session = await auth();
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
   return enhance(db, { user: session?.user as User });
 }
 

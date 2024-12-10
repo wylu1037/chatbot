@@ -26,4 +26,4 @@ export const models: Model[] = [
   },
 ] as const;
 
-export const DEFAULT_MODEL_NAME: string = "gpt-turbo-3.5";
+export const DEFAULT_MODEL_NAME = "gpt-turbo-3.5";
