@@ -20,7 +20,7 @@ export default async function ChatLayout({
   }
 
   const userNav = UserNavSchema.parse({
-    name: user?.name ?? "Guest",
+    name: user?.name ?? "Unknown",
     email: user?.email ?? "unknown@example.com",
     image: user?.image ?? "",
   });

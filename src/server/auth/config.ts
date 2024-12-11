@@ -58,14 +58,17 @@ export const authConfig = {
     signIn: "/signin",
     signOut: "/signout",
   },
+  session: {
+    strategy: "jwt",
+  },
   callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
+    session({ session, token }) {
+      if (session.user) {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        session.user.id = token.sub!;
+      }
+      return session;
+    },
   },
 } satisfies NextAuthConfig;
 
@@ -84,6 +87,7 @@ function authorize(prisma: PrismaClient) {
       select: { id: true, email: true, password: true },
     });
     if (!maybeUser?.password) return null;
+
     // verify the input password with stored hash
     const isValid = await compare(
       credentials.password as string,
@@ -92,6 +96,11 @@ function authorize(prisma: PrismaClient) {
     if (!isValid) {
       throw new Error("Invalid credentials");
     }
-    return { id: maybeUser.id, email: maybeUser.email };
+
+    return {
+      id: maybeUser.id,
+      email: maybeUser.email,
+      image: "/images/default_user_avatar.jpeg",
+    };
   };
 }
