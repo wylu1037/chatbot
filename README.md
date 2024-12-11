@@ -1,3 +1,16 @@
+<h1 align="center">🤖 Chatbot</h1>
+<p align="center">
+    <img alt="Static Badge" src="https://img.shields.io/badge/TypeScript-gray?logo=typescript">
+    <img alt="Static Badge" src="https://img.shields.io/badge/Next.js-v14.2.16-blue?logo=next.js">
+    <img alt="Static Badge" src="https://img.shields.io/badge/TailwindCSS-v3.4.1-blue?logo=tailwindcss">
+    <img alt="Static Badge" src="https://img.shields.io/badge/Vercel-gray?logo=vercel">
+    <img alt="Static Badge" src="https://img.shields.io/badge/NextAuth-gray?logo=auth0">
+</p>
+
+<br>
+<img src="./public/chatbot_index.png"/>
+<br>
+
 # Create T3 App
 
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
