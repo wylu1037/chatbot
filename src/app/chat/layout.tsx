@@ -1,12 +1,10 @@
 import { auth } from "@/server/auth";
 import { UserNavSchema } from "@/lib/schemas/user-nav";
 import { AppSidebar } from "@/components/layout/app-sidebar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import {
-  ModelSelector,
-  VisibilitySelector,
-} from "@/components/chat/chat-header";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { redirect } from "next/navigation";
+import { ChatHeader } from "@/components/chat/chat-header";
+
 export default async function ChatLayout({
   children,
 }: {
@@ -29,11 +27,7 @@ export default async function ChatLayout({
     <SidebarProvider>
       <AppSidebar userNav={userNav} />
       <main className="min-h-screen flex-1">
-        <div className="mt-2 flex w-full flex-row items-center gap-2 pl-1">
-          <SidebarTrigger />
-          <ModelSelector />
-          <VisibilitySelector />
-        </div>
+        <ChatHeader chatId="" selectedModelId="" />
         {children}
       </main>
     </SidebarProvider>

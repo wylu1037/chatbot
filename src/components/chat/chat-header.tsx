@@ -7,9 +7,50 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Lock } from "lucide-react";
-import { useState } from "react";
+import { Lock, PlusIcon } from "lucide-react";
+import { memo, useState } from "react";
 import { Model, models, DEFAULT_MODEL_NAME } from "@/lib/ai/models";
+import { SidebarTrigger, useSidebar } from "../ui/sidebar";
+import { useWindowSize } from "usehooks-ts";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@radix-ui/react-tooltip";
+import { Button } from "../ui/button";
+
+function PureChatHeader({
+  chatId,
+  selectedModelId,
+}: {
+  chatId: string;
+  selectedModelId: string;
+}) {
+  const { open } = useSidebar();
+  const { width: windowWidth } = useWindowSize();
+
+  return (
+    <header className="mt-2 flex w-full items-center gap-2 pl-1">
+      <SidebarTrigger />
+
+      {(!open || windowWidth < 768) && (
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline" size="icon">
+              <PlusIcon />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent align="center" className="mt-2 text-sm">
+            <Button>New chat</Button>
+          </TooltipContent>
+        </Tooltip>
+      )}
+
+      <ModelSelector />
+      <VisibilitySelector />
+    </header>
+  );
+}
 
 const ModelSelector = () => {
   const [selectedModel, setSelectedModel] =
@@ -57,3 +98,7 @@ const VisibilitySelector = () => {
 };
 
 export { ModelSelector, VisibilitySelector };
+
+export const ChatHeader = memo(PureChatHeader, (prevProps, nextProps) => {
+  return prevProps.selectedModelId === nextProps.selectedModelId;
+});
