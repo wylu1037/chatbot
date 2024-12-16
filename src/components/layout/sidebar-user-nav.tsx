@@ -15,14 +15,18 @@ import {
   Crown,
   LogOut,
   Share,
+  Moon,
+  Sun,
 } from "lucide-react";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { UserNavProps } from "@/lib/schemas/user-nav";
+import { useTheme } from "next-themes";
 
 export function SidebarUserNav({ userNav }: { userNav: UserNavProps }) {
   const router = useRouter();
+  const { theme, setTheme } = useTheme();
   const initials =
     userNav?.name
       ?.split(" ")
@@ -90,6 +94,7 @@ export function SidebarUserNav({ userNav }: { userNav: UserNavProps }) {
           <Settings className="mr-2 h-4 w-4" />
           <span>Settings</span>
         </DropdownMenuItem>
+        <ThemeToggleDropdownMenuItem />
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <Monitor className="mr-2 h-4 w-4" />
@@ -108,3 +113,19 @@ export function SidebarUserNav({ userNav }: { userNav: UserNavProps }) {
     </DropdownMenu>
   );
 }
+
+const ThemeToggleDropdownMenuItem = () => {
+  const { theme, setTheme } = useTheme();
+  return (
+    <DropdownMenuItem
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+    >
+      {theme === "dark" ? (
+        <Sun className="mr-2 h-4 w-4" />
+      ) : (
+        <Moon className="mr-2 h-4 w-4" />
+      )}
+      <span>{theme === "dark" ? "Light Mode" : "Dark Mode"}</span>
+    </DropdownMenuItem>
+  );
+};

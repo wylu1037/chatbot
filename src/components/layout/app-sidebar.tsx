@@ -163,7 +163,7 @@ export function AppSidebar({ userNav }: { userNav: UserNavProps }) {
                       </a>
                     </SidebarMenuButton>
                     {/* Actions */}
-                    <div className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 transition-opacity group-hover:opacity-100">
+                    <div className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 transition-opacity hover:opacity-100">
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <button className="rounded-md p-1 hover:bg-accent">
