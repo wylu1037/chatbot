@@ -45,7 +45,7 @@ const CardSkeleton = ({ className }: { className?: string }) => {
   return (
     <div
       className={cn(
-        "relative flex max-w-lg space-x-4 rounded-lg border border-b-0 border-border/70 bg-white p-4",
+        "relative flex max-w-lg space-x-4 rounded-lg border border-b-0 border-border/70 bg-background p-4",
         className,
       )}
     >

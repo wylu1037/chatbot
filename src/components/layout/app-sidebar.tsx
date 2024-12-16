@@ -154,7 +154,10 @@ export function AppSidebar({ userNav }: { userNav: UserNavProps }) {
             <SidebarGroupContent>
               <SidebarMenu>
                 {message.items.map((item) => (
-                  <SidebarMenuItem key={item.title} className="group relative">
+                  <SidebarMenuItem
+                    key={item.title}
+                    className="group/[sidebar-menu-item] group relative"
+                  >
                     <SidebarMenuButton asChild>
                       <a href={item.url}>
                         <span className="max-w-[200px] overflow-clip">
@@ -163,7 +166,7 @@ export function AppSidebar({ userNav }: { userNav: UserNavProps }) {
                       </a>
                     </SidebarMenuButton>
                     {/* Actions */}
-                    <div className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 transition-opacity hover:opacity-100">
+                    <div className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 transition-opacity group-hover/[sidebar-menu-item]:opacity-100">
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <button className="rounded-md p-1 hover:bg-accent">
