@@ -8,38 +8,44 @@ export default function ChatPage() {
   return (
     <div className="relative">
       <Chat />
-      <div className="absolute left-1/2 top-1/2 -z-50 mx-auto w-full max-w-xl -translate-x-1/2 -translate-y-[190px]">
-        <motion.div
-          className="absolute -top-4 w-full"
-          initial={{ scale: 1.03 }}
-          animate={{ scale: 0.97 }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            repeatType: "reverse",
-            delay: 0.5,
-          }}
-        >
-          <CardSkeleton className="max-w-xl scale-[0.97]" />
-        </motion.div>
-
-        <motion.div
-          className="relative"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            repeatType: "reverse",
-            delay: 0.5,
-          }}
-        >
-          <CardSkeleton className="max-w-xl" />
-        </motion.div>
-      </div>
+      <CardSkeletonDecoration />
     </div>
   );
 }
+
+const CardSkeletonDecoration = () => {
+  return (
+    <div className="absolute left-1/2 top-1/2 -z-50 mx-auto w-full max-w-xl -translate-x-1/2 -translate-y-[190px]">
+      <motion.div
+        className="absolute -top-4 w-full"
+        initial={{ scale: 1.03 }}
+        animate={{ scale: 0.97 }}
+        transition={{
+          duration: 1.5,
+          repeat: Infinity,
+          repeatType: "reverse",
+          delay: 0.5,
+        }}
+      >
+        <CardSkeleton className="max-w-xl scale-[0.97]" />
+      </motion.div>
+
+      <motion.div
+        className="relative"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 1.5,
+          repeat: Infinity,
+          repeatType: "reverse",
+          delay: 0.5,
+        }}
+      >
+        <CardSkeleton className="max-w-xl" />
+      </motion.div>
+    </div>
+  );
+};
 
 const CardSkeleton = ({ className }: { className?: string }) => {
   return (
