@@ -1,7 +1,7 @@
 import { auth } from "@/server/auth";
 import { UserNavSchema } from "@/lib/schemas/user-nav";
 import { AppSidebar } from "@/components/layout/app-sidebar";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { redirect } from "next/navigation";
 import { ChatHeader } from "@/components/chat/chat-header";
 
