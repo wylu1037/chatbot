@@ -124,7 +124,7 @@ function PureMultimodalInput({
         />
 
         <AttachmentsButton fileInputRef={fileInputRef} isLoading={isLoading} />
-        {!isLoading ? (
+        {isLoading ? (
           <StopButton stop={stop} setMessages={setMessages} />
         ) : (
           <SendButton
