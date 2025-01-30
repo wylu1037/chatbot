@@ -3,10 +3,16 @@
 import { SparklesIcon, Paperclip } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
-export default function Chat() {
-  const handleGenerate = () => {
-    console.log("Generate clicked");
+type ChatProps = {
+  chatId: string;
+};
+
+export default function Chat({ chatId }: ChatProps) {
+  const router = useRouter();
+  const handleGenerate = (chatId: string) => {
+    router.push(`/chat/${chatId}`);
   };
 
   return (
@@ -60,7 +66,7 @@ export default function Chat() {
           />
         </div>
         <Button
-          onClick={handleGenerate}
+          onClick={() => handleGenerate(chatId)}
           className={cn(
             "h-11 bg-orange-500 hover:bg-orange-600",
             "rounded-l-none",

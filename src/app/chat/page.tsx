@@ -3,11 +3,14 @@
 import Chat from "@/components/chat/chat";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import { generateUUID } from "@/lib/utils";
 
 export default function ChatPage() {
+  const chatId = generateUUID();
+
   return (
     <div className="relative">
-      <Chat />
+      <Chat chatId={chatId} />
       <CardSkeletonDecoration />
     </div>
   );
@@ -22,7 +25,7 @@ const CardSkeletonDecoration = () => {
         animate={{ scale: 0.97 }}
         transition={{
           duration: 1.5,
-          repeat: Infinity,
+          repeat: Number.POSITIVE_INFINITY,
           repeatType: "reverse",
           delay: 0.5,
         }}
@@ -36,7 +39,7 @@ const CardSkeletonDecoration = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{
           duration: 1.5,
-          repeat: Infinity,
+          repeat: Number.POSITIVE_INFINITY,
           repeatType: "reverse",
           delay: 0.5,
         }}
