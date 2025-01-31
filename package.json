@@ -21,6 +21,7 @@
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache"
   },
   "dependencies": {
+    "@ai-sdk/openai": "1.0.19",
     "@auth/prisma-adapter": "^2.7.2",
     "@prisma/client": "^5.14.0",
     "@radix-ui/react-alert-dialog": "^1.1.2",
