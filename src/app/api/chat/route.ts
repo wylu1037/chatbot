@@ -1,4 +1,35 @@
+import { customModel } from "@/lib/ai";
+import { models } from "@/lib/ai/models";
 import { auth } from "@/server/auth";
+import { Message, streamText } from "ai";
+import { getWeather } from "@/lib/ai/tools/get-weather";
+
+export async function POST(req: Request) {
+  const {
+    id,
+    messages,
+    modelId,
+  }: { id: string; messages: Array<Message>; modelId: string } =
+    await req.json();
+
+  const model = models.find((model) => model.id === modelId);
+
+  if (!model) {
+    return new Response("Model not found", { status: 404 });
+  }
+
+  const result = streamText({
+    model: customModel(model.apiIdentifier),
+    system: "You are a helpful assistant!",
+    messages,
+    maxSteps: 5,
+    tools: {
+      getWeather,
+    },
+  });
+
+  return result.toDataStreamResponse();
+}
 
 export async function DELETE(req: Request) {
   const { searchParams } = new URL(req.url);
