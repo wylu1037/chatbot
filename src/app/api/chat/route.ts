@@ -6,7 +6,7 @@ import { getWeather } from "@/lib/ai/tools/get-weather";
 
 export async function POST(req: Request) {
   const {
-    id,
+    id, // chat id
     messages,
     modelId,
   }: { id: string; messages: Array<Message>; modelId: string } =

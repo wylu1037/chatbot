@@ -41,3 +41,29 @@ You can check out the [create-t3-app GitHub repository](https://github.com/t3-os
 ## How do I deploy this?
 
 Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+
+
+---
+
+## 定义DB Schema
+
+1. 修改`schema.zmodel`
+2. 运行 `npx zenstack generate` 生成代码
+3. 运行 `npx prisma db push` 推送到DB
+4. 运行 `npx prisma db pull` 从DB拉取Schema
+
+
+
+## 代码中怎么访问DB
+
+### 使用生成的钩子
+位置：`src/lib/hooks/`
+
+### [使用tRPC的api](https://zenstack.dev/docs/guides/trpc)
+1. 在`schema.zmodel`中使用插件
+```
+plugin trpc {
+    provider = '@zenstackhq/trpc'
+    output = 'src/server/routers/generated'
+}
+```

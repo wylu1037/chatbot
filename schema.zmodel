@@ -58,7 +58,7 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
-
+    chats         Chat[]
     // everyone can signup, and user profile is also publicly readable
     @@allow("create,read", true)
 
@@ -72,4 +72,34 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+// A chat is a collection of messages
+model Chat {
+    id String @id @default(cuid())
+    title String
+    visibility String // public, private
+    userId String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    User User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    Messages Message[]
+    
+    @@allow('create,update,delete', auth() == User)
+    @@allow('read', auth() == User || visibility == 'public')
+}
+
+// A message is a single message in a chat
+model Message {
+    id String @id @default(cuid())
+    chatId String
+    role String // user, assistant, tool
+    content String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    Chat Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
+
+    @@allow('create,update,delete', auth() == Chat.User)
 }

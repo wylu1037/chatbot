@@ -159,6 +159,12 @@ const metadata = {
                     isDataModel: true,
                     isArray: true,
                     backLink: 'user',
+                }, chats: {
+                    name: "chats",
+                    type: "Chat",
+                    isDataModel: true,
+                    isArray: true,
+                    backLink: 'User',
                 },
             }
             , uniqueConstraints: {
@@ -199,10 +205,105 @@ const metadata = {
             ,
         }
         ,
+        chat: {
+            name: 'Chat', fields: {
+                id: {
+                    name: "id",
+                    type: "String",
+                    isId: true,
+                    attributes: [{ "name": "@default", "args": [] }],
+                }, title: {
+                    name: "title",
+                    type: "String",
+                }, visibility: {
+                    name: "visibility",
+                    type: "String",
+                }, userId: {
+                    name: "userId",
+                    type: "String",
+                    isForeignKey: true,
+                    relationField: 'User',
+                }, createdAt: {
+                    name: "createdAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@default", "args": [] }],
+                }, updatedAt: {
+                    name: "updatedAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@updatedAt", "args": [] }],
+                }, User: {
+                    name: "User",
+                    type: "User",
+                    isDataModel: true,
+                    backLink: 'chats',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "userId" },
+                }, Messages: {
+                    name: "Messages",
+                    type: "Message",
+                    isDataModel: true,
+                    isArray: true,
+                    backLink: 'Chat',
+                },
+            }
+            , uniqueConstraints: {
+                id: {
+                    name: "id",
+                    fields: ["id"]
+                },
+            }
+            ,
+        }
+        ,
+        message: {
+            name: 'Message', fields: {
+                id: {
+                    name: "id",
+                    type: "String",
+                    isId: true,
+                    attributes: [{ "name": "@default", "args": [] }],
+                }, chatId: {
+                    name: "chatId",
+                    type: "String",
+                    isForeignKey: true,
+                    relationField: 'Chat',
+                }, role: {
+                    name: "role",
+                    type: "String",
+                }, content: {
+                    name: "content",
+                    type: "String",
+                }, createdAt: {
+                    name: "createdAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@default", "args": [] }],
+                }, updatedAt: {
+                    name: "updatedAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@updatedAt", "args": [] }],
+                }, Chat: {
+                    name: "Chat",
+                    type: "Chat",
+                    isDataModel: true,
+                    backLink: 'Messages',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "chatId" },
+                },
+            }
+            , uniqueConstraints: {
+                id: {
+                    name: "id",
+                    fields: ["id"]
+                },
+            }
+            ,
+        }
+        ,
     }
     ,
     deleteCascade: {
-        user: ['Account', 'Session'],
+        user: ['Account', 'Session', 'Chat'],
+        chat: ['Message'],
     }
     ,
     authModel: 'User'
