@@ -12,7 +12,9 @@ export const getWeather = tool({
       `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m&hourly=temperature_2m&daily=sunrise,sunset&timezone=auto`,
     );
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const weatherData = await response.json();
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return weatherData;
   },
 });

@@ -54,7 +54,7 @@ export function SidebarUserNav({ user }: { user: User }) {
             {user?.image ? (
               <Image
                 src={user.image}
-                alt={user.name || "User avatar"}
+                alt={user.name ?? "User avatar"}
                 fill
                 sizes="32px"
                 className="object-cover"
