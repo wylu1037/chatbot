@@ -74,11 +74,19 @@ model VerificationToken {
     @@unique([identifier, token])
 }
 
+// Visibility is a enum that can be either public or private.
+// related to the Chat model.
+enum Visibility {
+    PUBLIC @map("public") // 映射到数据库中的public
+    PRIVATE @map("private") // 映射到数据库中的private
+}
+
 // A chat is a collection of messages
 model Chat {
     id String @id @default(cuid())
     title String
-    visibility String // public, private
+    visibility Visibility @default(PRIVATE)
+
     userId String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
@@ -86,20 +94,31 @@ model Chat {
     User User @relation(fields: [userId], references: [id], onDelete: Cascade)
     Messages Message[]
     
-    @@allow('create,update,delete', auth() == User)
-    @@allow('read', auth() == User || visibility == 'public')
+    @@allow('create', auth() != null) // Only authenticated users can create a chat
+    @@allow('update,delete', auth() == User)
+    @@allow('read', auth() == User || (visibility == 'public' && auth() != null))
+}
+
+// Role is a enum that can be either user, assistant, or tool.
+// related to the Message model.
+enum Role {
+    USER @map("user")
+    ASSISTANT @map("assistant")
+    TOOL @map("tool")
 }
 
 // A message is a single message in a chat
 model Message {
     id String @id @default(cuid())
     chatId String
-    role String // user, assistant, tool
+    role Role
     content String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
     Chat Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
 
-    @@allow('create,update,delete', auth() == Chat.User)
+    @@allow('create', auth() == Chat.User) // The chat author can create messages
+    @@allow('update,delete', auth() == Chat.User) // The chat author can update or delete their own messages
+    @@allow('read', auth() == Chat.User || (Chat.visibility == 'public' && auth() != null)) // The chat author or public chats can be read
 }

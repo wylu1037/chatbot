@@ -12,6 +12,17 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum Visibility {
+  PUBLIC  @map("public")
+  PRIVATE @map("private")
+}
+
+enum Role {
+  USER      @map("user")
+  ASSISTANT @map("assistant")
+  TOOL      @map("tool")
+}
+
 model Account {
   id                       String  @id() @default(cuid())
   userId                   String
@@ -60,20 +71,20 @@ model VerificationToken {
 }
 
 model Chat {
-  id         String    @id() @default(cuid())
+  id         String     @id() @default(cuid())
   title      String
-  visibility String
+  visibility Visibility @default(PRIVATE)
   userId     String
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt()
-  User       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt()
+  User       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   Messages   Message[]
 }
 
 model Message {
   id        String   @id() @default(cuid())
   chatId    String
-  role      String
+  role      Role
   content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt()

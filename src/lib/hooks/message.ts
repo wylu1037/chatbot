@@ -327,8 +327,9 @@ export function useSuspenseCountMessage<TArgs extends Prisma.MessageCountArgs, T
     const { endpoint, fetch } = getHooksContext();
     return useSuspenseModelQuery<TQueryFnData, TData, TError>('Message', `${endpoint}/message/count`, args, options, fetch);
 }
+import type { Role } from '@prisma/client';
 
-export function useCheckMessage<TError = DefaultError>(args: { operation: PolicyCrudKind; where?: { id?: string; chatId?: string; role?: string; content?: string }; }, options?: (Omit<UseQueryOptions<boolean, TError, boolean>, 'queryKey'> & ExtraQueryOptions)) {
+export function useCheckMessage<TError = DefaultError>(args: { operation: PolicyCrudKind; where?: { id?: string; chatId?: string; role?: Role; content?: string }; }, options?: (Omit<UseQueryOptions<boolean, TError, boolean>, 'queryKey'> & ExtraQueryOptions)) {
     const { endpoint, fetch } = getHooksContext();
     return useModelQuery<boolean, boolean, TError>('Message', `${endpoint}/message/check`, args, options, fetch);
 }

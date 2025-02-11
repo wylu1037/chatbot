@@ -327,8 +327,9 @@ export function useSuspenseCountChat<TArgs extends Prisma.ChatCountArgs, TQueryF
     const { endpoint, fetch } = getHooksContext();
     return useSuspenseModelQuery<TQueryFnData, TData, TError>('Chat', `${endpoint}/chat/count`, args, options, fetch);
 }
+import type { Visibility } from '@prisma/client';
 
-export function useCheckChat<TError = DefaultError>(args: { operation: PolicyCrudKind; where?: { id?: string; title?: string; visibility?: string; userId?: string }; }, options?: (Omit<UseQueryOptions<boolean, TError, boolean>, 'queryKey'> & ExtraQueryOptions)) {
+export function useCheckChat<TError = DefaultError>(args: { operation: PolicyCrudKind; where?: { id?: string; title?: string; visibility?: Visibility; userId?: string }; }, options?: (Omit<UseQueryOptions<boolean, TError, boolean>, 'queryKey'> & ExtraQueryOptions)) {
     const { endpoint, fetch } = getHooksContext();
     return useModelQuery<boolean, boolean, TError>('Chat', `${endpoint}/chat/check`, args, options, fetch);
 }

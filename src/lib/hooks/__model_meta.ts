@@ -217,7 +217,8 @@ const metadata = {
                     type: "String",
                 }, visibility: {
                     name: "visibility",
-                    type: "String",
+                    type: "Visibility",
+                    attributes: [{ "name": "@default", "args": [] }],
                 }, userId: {
                     name: "userId",
                     type: "String",
@@ -269,7 +270,7 @@ const metadata = {
                     relationField: 'Chat',
                 }, role: {
                     name: "role",
-                    type: "String",
+                    type: "Role",
                 }, content: {
                     name: "content",
                     type: "String",
