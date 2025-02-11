@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Lock, PlusIcon } from "lucide-react";
+import { Lock, Globe, PlusIcon } from "lucide-react";
 import { memo, useState } from "react";
 import { Model, models, DEFAULT_MODEL_NAME } from "@/lib/ai/models";
 import { SidebarTrigger, useSidebar } from "../ui/sidebar";
@@ -30,7 +30,7 @@ function PureChatHeader({
   const { width: windowWidth } = useWindowSize();
 
   return (
-    <header className="mt-2 flex w-full items-center gap-2 pl-1">
+    <header className="mt-4 flex w-full items-center gap-2 pl-1">
       <SidebarTrigger />
 
       {(!open || windowWidth < 768) && (
@@ -86,12 +86,21 @@ const VisibilitySelector = () => {
   return (
     <Select defaultValue="private">
       <SelectTrigger className="w-[120px]">
-        <Lock className="mr-2 h-4 w-4" />
         <SelectValue defaultValue="private" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="private">Private</SelectItem>
-        <SelectItem value="public">Public</SelectItem>
+        <SelectItem value="private">
+          <div className="flex items-center gap-2">
+            <Lock className="h-4 w-4" />
+            <span>Private</span>
+          </div>
+        </SelectItem>
+        <SelectItem value="public">
+          <div className="flex items-center gap-2">
+            <Globe className="h-4 w-4" />
+            <span>Public</span>
+          </div>
+        </SelectItem>
       </SelectContent>
     </Select>
   );

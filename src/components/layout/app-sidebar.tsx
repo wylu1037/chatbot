@@ -1,5 +1,6 @@
 "use client";
 
+import type { User } from "next-auth";
 import { Button } from "@/components/ui/button";
 import {
   Sidebar,
@@ -34,30 +35,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
-// Menu items.
-const items = [
-  {
-    title: "Home",
-    url: "#",
-  },
-  {
-    title: "Inbox",
-    url: "#",
-  },
-  {
-    title: "Calendar",
-    url: "#",
-  },
-  {
-    title: "Search",
-    url: "#",
-  },
-  {
-    title: "Settings",
-    url: "#",
-  },
-];
 
 const messages = [
   {
@@ -124,11 +101,11 @@ const messages = [
   },
 ];
 
-export function AppSidebar({ userNav }: { userNav: UserNavProps }) {
+export function AppSidebar({ user }: { user: User }) {
   return (
     <Sidebar>
       <SidebarHeader className="flex flex-row items-center justify-between p-4">
-        <h2 className="text-lg font-medium text-foreground">Chatbot</h2>
+        <h2 className="text-lg font-medium text-foreground">DeepChat</h2>
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
@@ -204,7 +181,7 @@ export function AppSidebar({ userNav }: { userNav: UserNavProps }) {
         ))}
       </SidebarContent>
       <SidebarFooter>
-        <SidebarUserNav userNav={userNav} />
+        <SidebarUserNav user={user} />
       </SidebarFooter>
     </Sidebar>
   );

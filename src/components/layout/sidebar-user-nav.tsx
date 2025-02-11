@@ -1,5 +1,6 @@
 "use client";
 
+import type { User } from "next-auth";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,14 +22,13 @@ import {
 import Image from "next/image";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { UserNavProps } from "@/lib/schemas/user-nav";
 import { useTheme } from "next-themes";
 
-export function SidebarUserNav({ userNav }: { userNav: UserNavProps }) {
+export function SidebarUserNav({ user }: { user: User }) {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
   const initials =
-    userNav?.name
+    user.name
       ?.split(" ")
       .map((n) => n[0])
       .join("")
@@ -51,10 +51,10 @@ export function SidebarUserNav({ userNav }: { userNav: UserNavProps }) {
       <DropdownMenuTrigger asChild>
         <button className="flex w-full items-center rounded-lg p-4 transition-colors hover:bg-accent">
           <div className="relative mr-2 h-8 w-8 overflow-hidden rounded-full">
-            {userNav?.image ? (
+            {user?.image ? (
               <Image
-                src={userNav.image}
-                alt={userNav.name || "User avatar"}
+                src={user.image}
+                alt={user.name || "User avatar"}
                 fill
                 sizes="32px"
                 className="object-cover"
@@ -67,9 +67,9 @@ export function SidebarUserNav({ userNav }: { userNav: UserNavProps }) {
             )}
           </div>
           <div className="flex flex-1 flex-col text-left">
-            <p className="text-sm font-medium">{userNav?.name ?? "Guest"}</p>
+            <p className="text-sm font-medium">{user.name ?? "Guest"}</p>
             <p className="text-xs text-muted-foreground">
-              {userNav?.email ?? "Not logged in"}
+              {user.email ?? "Not logged in"}
             </p>
           </div>
         </button>

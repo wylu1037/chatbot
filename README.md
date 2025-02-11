@@ -1,3 +1,5 @@
+[English](./README.md) | [简体中文](./README.zh-CN.md)
+
 <h1 align="center">🤖 Chatbot</h1>
 <p align="center">
     <img alt="Static Badge" src="https://img.shields.io/badge/TypeScript-gray?logo=typescript">
