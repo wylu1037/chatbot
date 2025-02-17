@@ -14,12 +14,20 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+// Necessary for tanstack-query
 plugin hooks {
   provider = '@zenstackhq/tanstack-query'
   target = 'react'
   version = 'v5'
   output = "./src/lib/hooks"
 }
+
+// Necessary for trpc
+plugin trpc {
+    provider = '@zenstackhq/trpc'
+    output = 'src/server/api/routers/generated'
+}
+
 
 // Necessary for Next auth
 model Account {
@@ -91,12 +99,12 @@ model Chat {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    User User @relation(fields: [userId], references: [id], onDelete: Cascade)
-    Messages Message[]
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    messages Message[]
     
     @@allow('create', auth() != null) // Only authenticated users can create a chat
-    @@allow('update,delete', auth() == User)
-    @@allow('read', auth() == User || (visibility == 'public' && auth() != null))
+    @@allow('update,delete', auth() == user)
+    @@allow('read', auth() == user || (visibility == 'public' && auth() != null))
 }
 
 // Role is a enum that can be either user, assistant, or tool.
@@ -116,9 +124,9 @@ model Message {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    Chat Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
+    chat Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
 
-    @@allow('create', auth() == Chat.User) // The chat author can create messages
-    @@allow('update,delete', auth() == Chat.User) // The chat author can update or delete their own messages
-    @@allow('read', auth() == Chat.User || (Chat.visibility == 'public' && auth() != null)) // The chat author or public chats can be read
+    @@allow('create', auth() == chat.user) // The chat author can create messages
+    @@allow('update,delete', auth() == chat.user) // The chat author can update or delete their own messages
+    @@allow('read', auth() == chat.user || (chat.visibility == 'public' && auth() != null)) // The chat author or public chats can be read
 }
