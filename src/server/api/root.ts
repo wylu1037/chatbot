@@ -3,7 +3,7 @@ import {
   createTRPCRouter,
   protectedProcedure,
 } from "./trpc";
-import { createRouter } from "./routers/generated";
+import { createRouter } from "./routers/generated/routers";
 
 export const appRouter = createRouter(createTRPCRouter, protectedProcedure);
 
