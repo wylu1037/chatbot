@@ -1,6 +1,11 @@
-import { createCallerFactory, createTRPCRouter } from "./trpc";
+import {
+  createCallerFactory,
+  createTRPCRouter,
+  protectedProcedure,
+} from "./trpc";
+import { createRouter } from "./routers/generated";
 
-export const appRouter = createTRPCRouter({});
+export const appRouter = createRouter(createTRPCRouter, protectedProcedure);
 
 // export type definition of API
 export type AppRouter = typeof appRouter;

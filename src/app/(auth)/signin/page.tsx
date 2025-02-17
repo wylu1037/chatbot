@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, Check, Eye, EyeOff, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { GithubIcon, DiscordIcon } from "@/components/icons";
 type OAuthProvider = "discord" | "google" | "github";
@@ -19,6 +19,9 @@ export default function SignInPage() {
     password: "",
   });
   const [error, setError] = useState<string | null>(null);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+
+  const toggleVisibility = () => setIsVisible((prevState) => !prevState);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -100,7 +103,7 @@ export default function SignInPage() {
             <Label htmlFor="email">Email</Label>
             <Input
               id="email"
-              placeholder="hello@example.com"
+              placeholder="Enter your email"
               type="email"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
@@ -111,13 +114,29 @@ export default function SignInPage() {
           </div>
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              placeholder="••••••••"
-              value={form.password}
-              onChange={(e) => setForm({ ...form, password: e.target.value })}
-            />
+            <div className="relative">
+              <Input
+                id="password"
+                type={isVisible ? "text" : "password"}
+                placeholder="Enter your password"
+                value={form.password}
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
+              />
+              <button
+                className="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-lg text-muted-foreground/80 outline-offset-2 transition-colors hover:text-foreground focus:z-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring/70 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
+                type="button"
+                onClick={toggleVisibility}
+                aria-label={isVisible ? "Hide password" : "Show password"}
+                aria-pressed={isVisible}
+                aria-controls="password"
+              >
+                {isVisible ? (
+                  <EyeOff size={16} strokeWidth={2} aria-hidden="true" />
+                ) : (
+                  <Eye size={16} strokeWidth={2} aria-hidden="true" />
+                )}
+              </button>
+            </div>
           </div>
 
           {error && (
