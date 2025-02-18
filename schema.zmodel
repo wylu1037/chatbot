@@ -25,7 +25,7 @@ plugin hooks {
 // Necessary for trpc
 plugin trpc {
     provider = '@zenstackhq/trpc'
-    output = 'src/server/api/routers/generated'
+    output = './src/server/api/routers/generated'
 }
 
 

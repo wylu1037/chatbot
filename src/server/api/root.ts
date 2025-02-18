@@ -1,11 +1,11 @@
 import {
   createCallerFactory,
-  createTRPCRouter,
+  createTRPCRouter, // equivalent t.router
   protectedProcedure,
 } from "./trpc";
-import { createRouter } from "./routers/generated/routers";
+import { createRouter as createCRUDRouter } from "./routers/generated/routers";
 
-export const appRouter = createRouter(createTRPCRouter, protectedProcedure);
+export const appRouter = createCRUDRouter(createTRPCRouter, protectedProcedure);
 
 // export type definition of API
 export type AppRouter = typeof appRouter;
