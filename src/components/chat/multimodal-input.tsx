@@ -6,15 +6,8 @@ import type {
   CreateMessage,
   Message,
 } from "ai";
-import {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  memo,
-  useCallback,
-  useRef,
-  useState,
-} from "react";
+import { memo, useCallback, useRef, useState } from "react";
+import type { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { Button } from "../ui/button";
 import { ArrowUp, PaperclipIcon, Square } from "lucide-react";
 import { Textarea } from "../ui/textarea";

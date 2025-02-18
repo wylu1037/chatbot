@@ -28,7 +28,6 @@ import {
   Trash2,
 } from "lucide-react";
 import { SidebarUserNav } from "./sidebar-user-nav";
-import { UserNavProps } from "@/lib/schemas/user-nav";
 import {
   DropdownMenu,
   DropdownMenuContent,

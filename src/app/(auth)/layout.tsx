@@ -1,5 +1,3 @@
-import { cn } from "@/lib/utils";
-
 export default function AuthLayout({
   children,
 }: {
@@ -13,9 +11,9 @@ export default function AuthLayout({
         <div className="bg-grid-white/[0.05] bg-grid absolute inset-0 h-full w-full" />
 
         {/* 动态光效装饰 - 增加更多光斑和动画效果 */}
-        <div className="animate-blob absolute -left-4 top-0 h-96 w-96 rounded-full bg-purple-500/30 opacity-20 mix-blend-multiply blur-3xl filter" />
-        <div className="animation-delay-2000 animate-blob absolute -bottom-8 left-20 h-96 w-96 rounded-full bg-blue-500/30 opacity-20 mix-blend-multiply blur-3xl filter" />
-        <div className="animation-delay-4000 animate-blob absolute -right-4 top-1/2 h-96 w-96 rounded-full bg-teal-500/30 opacity-20 mix-blend-multiply blur-3xl filter" />
+        <div className="absolute -left-4 top-0 h-96 w-96 animate-blob rounded-full bg-purple-500/30 opacity-20 mix-blend-multiply blur-3xl filter" />
+        <div className="animation-delay-2000 absolute -bottom-8 left-20 h-96 w-96 animate-blob rounded-full bg-blue-500/30 opacity-20 mix-blend-multiply blur-3xl filter" />
+        <div className="animation-delay-4000 absolute -right-4 top-1/2 h-96 w-96 animate-blob rounded-full bg-teal-500/30 opacity-20 mix-blend-multiply blur-3xl filter" />
 
         {/* 额外的小光斑 */}
         <div className="absolute right-1/4 top-1/4 h-24 w-24 animate-pulse rounded-full bg-yellow-500/20 blur-xl" />
@@ -39,9 +37,9 @@ export default function AuthLayout({
             </p>
             {/* 装饰性指示器 - 改进动画效果 */}
             <div className="mt-8 flex gap-4">
-              <div className="animate-glow h-2 w-2 rounded-full bg-blue-500" />
-              <div className="animation-delay-200 animate-glow h-2 w-2 rounded-full bg-green-500" />
-              <div className="animation-delay-500 animate-glow h-2 w-2 rounded-full bg-red-500" />
+              <div className="h-2 w-2 animate-glow rounded-full bg-blue-500" />
+              <div className="animation-delay-200 h-2 w-2 animate-glow rounded-full bg-green-500" />
+              <div className="animation-delay-500 h-2 w-2 animate-glow rounded-full bg-red-500" />
             </div>
           </div>
         </div>

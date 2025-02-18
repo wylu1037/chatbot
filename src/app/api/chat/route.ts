@@ -1,7 +1,8 @@
 import { customModel } from "@/lib/ai";
 import { models } from "@/lib/ai/models";
 import { auth } from "@/server/auth";
-import { Message, streamText } from "ai";
+import { streamText } from "ai";
+import type { Message } from "ai";
 import { getWeather } from "@/lib/ai/tools/get-weather";
 
 export async function POST(req: Request) {

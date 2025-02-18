@@ -1,8 +1,8 @@
 "use client";
 
 import { MultimodalInput } from "@/components/chat/multimodal-input";
-import { Message, useChat } from "ai/react";
-import useSWR, { useSWRConfig } from "swr";
+import { type Message, useChat } from "ai/react";
+import { useSWRConfig } from "swr";
 
 export default function ChatPage() {
   const id = "123";

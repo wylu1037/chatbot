@@ -2,7 +2,7 @@ import { enhance } from "@zenstackhq/runtime";
 import { NextRequestHandler } from "@zenstackhq/server/next";
 import { db } from "@/server/db";
 import { auth } from "@/server/auth";
-import { User } from "@prisma/client";
+import type { User } from "@prisma/client";
 
 // create an enhanced Prisma client with user context
 async function getPrisma() {

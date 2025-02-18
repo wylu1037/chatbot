@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { AlertCircle, Check, Eye, EyeOff, X } from "lucide-react";
+import { AlertCircle, Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { GithubIcon, DiscordIcon } from "@/components/icons";
 type OAuthProvider = "discord" | "google" | "github";
@@ -40,6 +40,7 @@ export default function SignInPage() {
         router.refresh();
       }
     } catch (error) {
+      console.error(error);
       setError("Failed to sign in");
     } finally {
       setIsLoading(false);
@@ -52,6 +53,7 @@ export default function SignInPage() {
       router.push("/");
       router.refresh();
     } catch (error) {
+      console.error(error);
       setError("Authentication failed. Please try again.");
     }
   };

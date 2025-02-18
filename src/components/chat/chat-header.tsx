@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/select";
 import { Lock, Globe, PlusIcon } from "lucide-react";
 import { memo, useState } from "react";
-import { Model, models, DEFAULT_MODEL_NAME } from "@/lib/ai/models";
+import { type Model, models, DEFAULT_MODEL_NAME } from "@/lib/ai/models";
 import { SidebarTrigger, useSidebar } from "../ui/sidebar";
 import { useWindowSize } from "usehooks-ts";
 import {

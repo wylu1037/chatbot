@@ -46,6 +46,7 @@ export default function SignUpPage() {
       router.push("/");
       router.refresh();
     } catch (error) {
+      console.error(error);
       setError("registration failed");
     } finally {
       setIsLoading(false);

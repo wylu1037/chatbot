@@ -26,7 +26,6 @@ import { useTheme } from "next-themes";
 
 export function SidebarUserNav({ user }: { user: User }) {
   const router = useRouter();
-  const { theme, setTheme } = useTheme();
   const initials =
     user.name
       ?.split(" ")
