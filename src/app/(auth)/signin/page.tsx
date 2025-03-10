@@ -26,11 +26,13 @@ const providersSchema = z.enum(["discord", "google", "github"], {
 
 type OAuthProvider = z.infer<typeof providersSchema>;
 
+// Define the form schema
 const formSchema = z.object({
   email: z.string().email("Invalid email address"),
   password: z.string().min(8, "Password must be at least 8 characters long"),
 });
 
+// Define the form data type
 type FormData = z.infer<typeof formSchema>;
 
 export default function SignInPage() {
